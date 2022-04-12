@@ -1,7 +1,8 @@
 from dataclasses import dataclass
+from typing import List, Dict
 
 
 @dataclass
 class Node:
 
-    nodes: list[dict]
+    nodes: List[Dict]

@@ -27,12 +27,18 @@ data_ways = []
 
 """ TODO fix way_values bug. It keeps iterating..."""
 def find_ways() -> None:
+
+    referencias = []
+    key = []
+    val = []
     for way in ways:
-        for child in ways:
+        for child in way:
             way_values = {
                 'id': way.attrib['id'],
+                'ref': child.attrib.get('ref'),
                 'key': child.attrib.get('k'),
                 'val': child.attrib.get('v')
-            }
+                }
 
-        data_ways.append(way_values)
+            data_ways.append(way_values)
+            

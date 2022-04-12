@@ -1,7 +1,8 @@
-from dataclasses import dataclass
-
+from dataclasses import dataclass 
+from typing import List, Dict
 
 @dataclass
 class Way:
 
-    ways: list[dict]
+    ways: List[Dict] 
+
