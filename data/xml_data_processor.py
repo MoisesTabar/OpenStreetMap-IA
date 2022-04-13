@@ -1,4 +1,6 @@
 import xml.etree.ElementTree as ET
+import xmltodict
+import json
 
 archivo_xml = ET.parse('santo_domingo.osm')
 
@@ -24,21 +26,24 @@ ways = root.findall('way')
 data_ways = []
 
 
-
-""" TODO fix way_values bug. It keeps iterating..."""
 def find_ways() -> None:
-
-    referencias = []
-    key = []
-    val = []
     for way in ways:
-        for child in way:
-            way_values = {
-                'id': way.attrib['id'],
-                'ref': child.attrib.get('ref'),
-                'key': child.attrib.get('k'),
-                'val': child.attrib.get('v')
-                }
 
-            data_ways.append(way_values)
-            
+        decoded_way = ET.tostring(way)
+
+
+        data = json.dumps(xmltodict.parse(decoded_way))
+
+        parsed_data = json.loads(data)
+        
+        way_values = {
+            "way": {
+                "id": parsed_data["way"]["@id"],
+                "nd": parsed_data["way"]["nd"],
+                "tag": parsed_data["way"]["tag"]
+            }
+        }
+
+        print(way_values)
+
+        data_ways.append(way_values)
