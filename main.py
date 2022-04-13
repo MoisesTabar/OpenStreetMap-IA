@@ -18,7 +18,7 @@ def main() -> None:
     node = Node(data_nodes)
     
     print(len(node.nodes))
-    
+
     print("Starting way search operation")
 
     find_ways()
