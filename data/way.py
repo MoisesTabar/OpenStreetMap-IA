@@ -1,8 +1,15 @@
-from dataclasses import dataclass 
+from dataclasses import dataclass
 from typing import List, Dict
 
-@dataclass
+# @dataclass
 class Way:
 
-    ways: List[Dict] 
+    def __init__(self, id) -> None:
+        self.id = id 
+        self.nodos = []
+        
+
+        #ways: List[Dict] 
+
+
 
