@@ -1,15 +1,17 @@
-from dataclasses import dataclass
-from typing import List, Dict
+from dataclasses import dataclass, field
 
-# @dataclass
+
+@dataclass
+class Tags:
+
+    highway: str
+    oneway: str
+    max_speed: int
+
+
+@dataclass
 class Way:
 
-    def __init__(self, id) -> None:
-        self.id = id 
-        self.nodos = []
-        
-
-        #ways: List[Dict] 
-
-
-
+    id: str
+    nodes: list = field(default_factory=list)
+    tags: list[Tags] = field(default_factory=list)
