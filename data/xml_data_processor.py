@@ -46,17 +46,43 @@ def find_ways() -> None:
                 via.nodes.append(nodoData)
 
         for node in parsed_data["way"]['tag']:
-
-            way_tag = node['@k']
-            is_way = node['@v']
-
-            if way_tag == 'oneway' and is_way == 'yes':
-                w_tag = Tags(highway='no', oneway=is_way, max_speed=0)
+            try:
+                tag = node['@k'] # nombre del valor
+                value = node['@v'] # valor
 
 
-            if way_tag == 'highway' and is_way == 'yes':
-                w_tag = Tags(highway='yes', oneway='no', max_speed=0)
+                if tag == 'highway':
+                    highway_tag = Tags(highway=value)
+                    
+                    if value == 'residential':
+                        highway_tag.max_speed = 40
 
-                via.tags.append(w_tag)
-            
+                    elif value == 'primary':
+                        highway_tag.max_speed = 100
+
+                    elif value == 'secondary':
+                        highway_tag.max_speed = 50
+
+                    elif value == 'tertiary':
+                        highway_tag.max_speed = 60
+
+                    else:
+                        highway_tag.highway = 'residential'
+                        highway_tag.max_speed = 40
+
+                    via.tags = highway_tag
+                 
+
+                if tag == 'oneway' and value in ('yes', 'no'):
+                    if value == 'yes':
+                        highway_tag.oneway = True
+                    else:
+                        highway_tag.oneway = False
+
+            except TypeError:
+                print("Error degraciao")
+            except KeyError:
+                print("Maldita baina")
+
+        # print(via.tags)
         data_ways.append(via)
