@@ -15,9 +15,8 @@ def main() -> None:
 
     print("Finishing node search operation successfully")
 
-    node = Node(data_nodes)
-    
-    print(len(node.nodes))
+    # node = (data_nodes)
+    print(len(data_nodes))
 
     print("Starting way search operation")
 
@@ -25,9 +24,9 @@ def main() -> None:
 
     print("Finishing way search operation successfully")
 
-    way = Way(data_ways)
-    
-    print(way.ways)
+    # way = (data_ways)
+    # for way in data_ways:
+    #     print(way.id)
 
 if __name__ == '__main__':
     main()
