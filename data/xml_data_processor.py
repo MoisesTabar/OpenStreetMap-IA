@@ -39,12 +39,11 @@ def find_ways() -> None:
         
         via = Way(parsed_data["way"]["@id"])
         
-        # for nodo in parsed_data["way"]["nd"]:
-        #       nodoRef = filter(lambda busqueda: busqueda.id == nodo['@ref'], data_nodes)
+        for nodo in parsed_data["way"]["nd"]:
+               nodoRef = filter(lambda busqueda: busqueda.id == nodo['@ref'], data_nodes)
 
-        #       for nodoData in nodoRef:
-        #             via.nodes.append(nodoData)
-        #             #print(nodoData)
+               for nodoData in nodoRef:
+                     via.nodes.append(nodoData)
 
         if parsed_data["way"]["nd"][0]["@ref"] == parsed_data["way"]["nd"][len(parsed_data["way"]["nd"])-1]["@ref"]: 
 
@@ -105,7 +104,6 @@ def find_ways() -> None:
             data_ways.append(via)
             
         via.tags = tags
-        #print(via.tags)
 
     print(len(data_ways))
-        
+        data_ways.append(via)
