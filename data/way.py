@@ -14,4 +14,4 @@ class Way:
 
     id: str
     nodes: list = field(default_factory=list)
-    tags: list[Tags] = field(default_factory=list)
+    open: bool = True

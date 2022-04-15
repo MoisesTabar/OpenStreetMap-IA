@@ -39,24 +39,73 @@ def find_ways() -> None:
         
         via = Way(parsed_data["way"]["@id"])
         
-        for nodo in parsed_data["way"]["nd"]:
-            nodoRef = filter(lambda busqueda: busqueda.id == nodo['@ref'], data_nodes)
+        # for nodo in parsed_data["way"]["nd"]:
+        #       nodoRef = filter(lambda busqueda: busqueda.id == nodo['@ref'], data_nodes)
 
-            for nodoData in nodoRef:
-                via.nodes.append(nodoData)
+        #       for nodoData in nodoRef:
+        #             via.nodes.append(nodoData)
+        #             #print(nodoData)
 
-        for node in parsed_data["way"]['tag']:
+        if parsed_data["way"]["nd"][0]["@ref"] == parsed_data["way"]["nd"][len(parsed_data["way"]["nd"])-1]["@ref"]: 
 
-            way_tag = node['@k']
-            is_way = node['@v']
+            via.open = False
 
-            if way_tag == 'oneway' and is_way == 'yes':
-                w_tag = Tags(highway='no', oneway=is_way, max_speed=0)
+        tags = Tags()
+        tags.highway = "residential"
+        tags.max_speed = 30
+        try:
+          
+            if via.open:
+                for node in parsed_data["way"]['tag']:
+                    
+                    try:
+                        tag = node['@k'] # nombre del valor
+                        value = node['@v'] # valor
 
 
-            if way_tag == 'highway' and is_way == 'yes':
-                w_tag = Tags(highway='yes', oneway='no', max_speed=0)
+                        if tag == 'highway':
+                            tags.highway = value
+                            
+                            if value == 'residential':
+                                tags.max_speed = 30
 
-                via.tags.append(w_tag)
+                            elif value == 'primary':
+                                tags.max_speed = 100
+
+                            elif value == 'secondary':
+                                tags.max_speed = 50
+
+                            elif value == 'tertiary':
+                                tags.max_speed = 60
+
+                            else:
+                                tags.highway = 'residential'
+                                tags.max_speed = 30
+
+                            
+                        
+
+                        if tag == 'oneway' and value in ('yes', 'no'):
+                            if value == 'yes':
+                                tags.oneway = True
+                            else:
+                                tags.oneway = False
+
+                    except TypeError:
+                        tags.highway = "residential"
+                        tags.max_speed = 30
+
+                if tags.highway == "":
+                    tags.highway = "residential"
+                    tags.max_speed = 30
+
+            data_ways.append(via) 
+                
+        except:
+            data_ways.append(via)
             
-        data_ways.append(via)
+        via.tags = tags
+        #print(via.tags)
+
+    print(len(data_ways))
+        
