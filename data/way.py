@@ -15,3 +15,4 @@ class Way:
     id: str
     tags: Tags = field(default_factory=Tags)
     nodes: list = field(default_factory=list)
+    open: bool = True
