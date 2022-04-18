@@ -1,32 +1,31 @@
-from data.xml_data_processor import ( 
-    find_nodes, 
+from data.xml_data_processor import (
+    find_nodes,
     find_ways,
     data_nodes,
     data_ways
 )
-from data.node import Node
-from data.way import Way
-
+import algoritmo
+from data.graph import Graph
 
 def main() -> None:
+
     print("Starting node search operation")
-
     find_nodes()
-
     print("Finishing node search operation successfully")
-
-    # node = (data_nodes)
-    print(len(data_nodes))
-
     print("Starting way search operation")
-
     find_ways()
-
     print("Finishing way search operation successfully")
+    g = Graph(data_ways)
 
-    # way = (data_ways)
-    # for way in data_ways:
-    #     print(way.id)
+    ady = g.get_ady()
 
+    #se imprimen todas las adyasencias aqui pueden buscar puntos para poner en el algoritmo
+    for i in ady.keys():
+        print(i, end= " ")
+        for k in ady[i]:
+            print("-->", k, end=" ")
+        print()
+    #aqui se prueba el algoritmo
+    algoritmo.prueba_UCS((18.4740672, -69.9098465),(18.4753492, -69.9059964), ady)
 if __name__ == '__main__':
     main()
