@@ -1,5 +1,4 @@
 import math
-
 class Arista:
         def __init__(self, n1, n2, v, dirigido):
 
@@ -10,7 +9,7 @@ class Arista:
             self.__dirigido = dirigido
 
         def costo(self):
-
+            # Determinar el costo de la arista
             distancia = math.sqrt((float(self.n1.lon) - float(self.n2.lon))**2 + (float(self.n1.lat) - float(self.n2.lat))**2)
             tiempo = (distancia * 100000) / (self.maxvelocidad/3.6)
             return tiempo
@@ -19,7 +18,7 @@ class Arista:
             return self.__costo
 
         def dirigido(self) -> bool:
-            return self.__dirigido #Hay que cambiarlo a True porque es direccionado
+            return self.__dirigido
 
         def get_node(self, x):
                 if x==1:

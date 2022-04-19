@@ -15,3 +15,8 @@ def draw_location(coords:list):
     folium.PolyLine(coords).add_to(m) # Se traza la ruta a tomar
 
     m.save('index.html')
+
+def empty_map():
+
+    m = folium.Map(location = [18.4679962,-69.2974377], tiles='OpenStreetMap' ,zoom_start=14.5)
+    m.save('index.html')

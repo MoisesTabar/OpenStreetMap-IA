@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
 
-
 @dataclass
 class Tags:
 
     highway: str = ''
     oneway: bool = False
     max_speed: int = 0
+    name: str = ''
 
 
 @dataclass
