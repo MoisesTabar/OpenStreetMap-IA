@@ -2339,7 +2339,7 @@
   <tag k="geometry_source_type" v="gps"/>
   <tag k="highway" v="primary"/>
   <tag k="lanes" v="3"/>
-  <tag k="maxspeed" v="60"/>
+  <tag k="maxspeed" v="60"/>    
   <tag k="name" v="Avenida 27 de Febrero"/>
   <tag k="oneway" v="yes"/>
   <tag k="operational_status" v="open"/>

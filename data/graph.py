@@ -1,8 +1,4 @@
-from .node import Node
-from .way import Way,Tags
 from .arista import Arista
-from .xml_data_processor import data_ways, data_nodes, find_nodes, find_ways
-
 
 class Graph:
     def __init__(self, data_ways) -> None:
@@ -10,25 +6,31 @@ class Graph:
         self.__aristas = []
         self.__adyacencia = {}
 
-        j = 0
         for way in data_ways:
+
             if way.open:
                 for n in range(len(way.nodes)):
+
                     try:
                         maxvelocidad = way.tags.max_speed
                         dirigido = way.tags.oneway
-                        arista = Arista(way.nodes[n], way.nodes[n+1], maxvelocidad, dirigido) #Creamos la arista
+                        arista = Arista(way.nodes[n], way.nodes[n+1], maxvelocidad, dirigido) 
+                        #Creamos la arista
                         self.agregar(arista)
                     except:
                         pass
 
-    def agregar(self, arista: Arista):#agrega aristas
+            
+    def agregar(self, arista: Arista):
+        #Agrega aristas
         if arista not in self.__aristas:
             self.__aristas.append(arista)
             self.agregar_ady(arista)
 
-    def get_ady(self): #se crean las adyacensias y se añaden al diccionario de adyasencias
+    def get_ady(self): 
+        # Devuelve el diccionario de adyacencia
         return self.__adyacencia
+
 
     def agregar_ady(self, arista):
         """Esta función añade los adyasentes"""

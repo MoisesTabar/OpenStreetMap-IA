@@ -1,7 +1,5 @@
-from collections import deque
 import heapq
-from Folium import draw_location
-
+from Folium import draw_location, empty_map
 
 def prueba_UCS(nodoInicial, nodoMeta, adjacency_list):
 
@@ -28,7 +26,7 @@ def prueba_UCS(nodoInicial, nodoMeta, adjacency_list):
         explorado.append(estado[0])
         # el estado[0] se refiere al primer elemento de la tupla estado, que almacena el nodo y su costo
 
-        if(estado[0] == nodoMeta):
+        if(estado[0] == nodoMeta or estado[0]not in adjacency_list):
 
             rutaSolucion = []
             n = estado[0]
@@ -55,7 +53,8 @@ def prueba_UCS(nodoInicial, nodoMeta, adjacency_list):
             if (vecino not in frontera_estado and vecino not in explorado):
                 costo[vecino]= costo[estado[0]] + costoVecino
                 heapq.heappush(frontera, (vecino, costoVecino))
-                ruta[vecino] = estado[0] # Agregar el nodo a la ruta que se está encontrando
+                ruta[vecino] = estado[0]
+                # Agregar el nodo a la ruta que se está encontrando
                 frontera_estado.append(vecino)
 
             # Se evalua si se debe actualizar el valor del costo del nodo.

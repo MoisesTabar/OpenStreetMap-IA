@@ -4,25 +4,29 @@ import json
 from .node import Node 
 from .way import Tags, Way
 
-archivo_xml = ET.parse('Prueba.osm')
+
+archivo_xml = ET.parse('San Pedro.osm')
 
 root = archivo_xml.getroot()
 
 nodes = root.findall('node')
 data_nodes = []
 
+
 def find_nodes() -> None:
     for node in nodes:
         nodo = Node(
-            node.attrib['id'] , 
+            node.attrib['id'],
             node.attrib['lat'], 
             node.attrib['lon']
         )
 
         data_nodes.append(nodo)
 
+
 ways = root.findall('way')
 data_ways = []
+
 
 def find_ways() -> None:
     for way in ways:
@@ -48,6 +52,8 @@ def find_ways() -> None:
         tags = Tags()
         tags.highway = "residential"
         tags.max_speed = 30
+
+
         try:
           
             if via.open:
@@ -77,6 +83,10 @@ def find_ways() -> None:
                                 tags.highway = 'residential'
                                 tags.max_speed = 30
 
+                        if tag == 'name':
+                            tags.name = value
+                        
+
                         if tag == 'oneway' and value in ('yes', 'no'):
                             if value == 'yes':
                                 tags.oneway = True
@@ -97,3 +107,4 @@ def find_ways() -> None:
             data_ways.append(via)
             
         via.tags = tags
+
